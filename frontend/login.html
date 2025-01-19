@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="home.html"><img src="images/rose.png" alt="Логотип"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="jobs.html">Вакансии</a></li>
+                    <li><a href="partners.html">Компании-партнёры</a></li>
+                    <li><a href="faq.html">Ответы на вопросы</a></li>
+                </ul>
+            </nav>
+            <div class="auth-links">
+                <a href="login.html" class="login-button">Авторизация</a>
+                <a href="index.html" class="register-button">Регистрация</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="content-box">
+            <h1>Авторизация</h1>
+	    <form id="loginForm"> <!-- Укажите ваш обработчик формы -->
+		<div class="form-group">
+        	    <label for="identifier">Email или номер телефона:</label>
+        	    <input type="text" id="identifier" name="identifier" required>
+    		</div>
+    		<div class="form-group">
+        	    <label for="password">Пароль:</label>
+        	    <input type="password" id="password" name="password" required>
+    		</div>
+    		<button type="submit" class="button small-button">Войти</button>
+	    </form>
+	</div>
+	<div class = "content-box">
+            <p class="registration-prompt">Ещё не зарегистрирован? <a href="index.html" class="register-button">Регистрация</a></p>
+	<div>
+    </main>
+    <footer>
+        <p>&copy; 2023 Карьера с сердцем. Все права защищены.</p>
+    </footer>
+</body>
+</html>
+

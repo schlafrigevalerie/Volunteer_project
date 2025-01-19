@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="home.html"><img src="images/rose.png" alt="Логотип"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="jobs.html">Вакансии</a></li>
+                    <li><a href="partners.html">Компании-партнёры</a></li>
+                    <li><a href="faq.html">Ответы на вопросы</a></li>
+                </ul>
+            </nav>
+            <div class="auth-links">
+                <a href="login.html" class="login-button">Авторизация</a>
+                <a href="index.html" class="register-button">Регистрация</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="content-box">
+            <h1>Регистрация</h1>
+            <form id="registrationForm" action="index.php" method="POST"> <!-- Укажите ваш обработчик формы -->
+                <div class="form-group">
+                    <label for="role">Выберите роль:</label>
+                    <select id="role" name="role" required>
+                        <option value="" disabled selected>-- Выберите роль --</option>
+                        <option value="job_seeker">Я ищу работу</option>
+                        <option value="employer">Я работодатель</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="firstName">Имя:</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Фамилия:</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label for="middleName">Отчество:</label>
+                    <input type="text" id="middleName" name="middleName">
+                </div>
+                <div class="form-group">
+                    <label for="birthDate">Дата рождения:</label>
+                    <input type="date" id="birthDate" name="birthDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Номер телефона:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Повторите пароль:</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="agree" name="agree" required>
+                    <label for="agree">Согласен на обработку персональных данных</label>
+                </div>
+                <button type="submit" class="button small-button">Зарегистрироваться</button>
+            </form>
+        </div>
+        <div class="content-box">
+            <p class="login-prompt">Уже зарегистрированы? <a href="login.html" class="login-button">Авторизация</a></p>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2023 Карьера с сердцем. Все права защищены.</p>
+    </footer>
+    <script src="js/app.js"></script> <!-- Подключаем ваш JavaScript файл -->
+</body>
+</html>
+

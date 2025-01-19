@@ -1,0 +1,194 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('../images/flowers.jpg'); /* Установка фона */
+    background-size:130% auto;/* Заполнение всего экрана */
+    background-repeat: no-repeat; /* Без повторения */
+    font-family: "Lora";
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: rgba(247, 249, 223, 0.8); /* Полупрозрачный нежно-желтый фон */
+    border-bottom: 2px solid black; /* Черная линия */
+    padding: 20px 0; /* Убираем отступы */
+    margin: 0; /* Убираем отступы */
+    width: 100%; /* Занять всю ширину */
+}
+
+.header-content {
+    display: flex;
+    font-family: "Lora";
+    font-size: large;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px; /* Максимальная ширина контейнера */
+    margin: 0 auto; /* Центрирование контейнера */
+    width: 100%; /* Занять всю ширину */
+    padding: 0 20px; /* Добавляем отступы по бокам для содержимого */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px; /* Высота логотипа */
+    margin-right: 10px; /* Отступ между логотипом и текстом */
+}
+
+nav {
+    flex-grow: 1; /* Занять оставшееся пространство */
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start; /* Ссылки слева */
+    font-family: "Lora";
+}
+
+nav ul li {
+    margin: 0 30px; /* Равномерное расстояние между ссылками */
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+}
+
+.auth-links {
+    display: flex;
+    align-items: center;
+}
+
+.auth-links a {
+    margin-left: 15px;
+    text-decoration: none;
+}
+
+.login-button {
+    background-color: white; /* Белый фон для кнопки авторизации */
+    color: #333; /* Темный текст */
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid #333; /* Обводка для кнопки авторизации */
+}
+
+.register-button {
+    background-color:#cd89bc; /* Черный фон для кнопки регистрации */
+    color: white; /* Белый текст */
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.register-button:hover {
+    background-color: #a06591; /* Темнее розовый при наведении */
+}
+
+
+.content-box {
+    background-color: rgba(255, 255, 255, 0.8); /* Полупрозрачный белый фон */
+    border-radius: 15px; /* Закругленные углы */
+    padding: 20px; /* Внутренние отступы */
+    max-width: 600px; /* Максимальная ширина контейнера */
+    margin: 20px auto; /* Центрирование контейнера */
+    text-align: center; /* Выравнивание текста по центру */
+}
+
+h1 {
+    margin: 0 0 10px; /* Убираем верхний отступ и добавляем нижний */
+}
+
+h2 {
+    margin: 0 0 20px; /* Убираем верхний отступ и добавляем нижний */
+}
+
+
+main {
+    text-align: center;
+    margin: 50px 0;
+}
+
+.button {
+    /*width: 100%; /* Ширина кнопки 100% от контейнера */
+    padding: 10px 15px; /* Внутренние отступы */
+    border: none; /* Убираем обводку */
+    border-radius: 5px; /* Закругленные углы */
+    background-color: #cd89bc; /* Цвет кнопки */
+    color: white; /* Цвет текста кнопки */
+    /*cursor: pointer; /* Указатель при наведении */
+}
+
+.button:hover {
+    background-color: #a06591; /* Темнее розовый при наведении */
+}
+
+.motivational-cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Позволяет карточкам переноситься на новую строку */
+    margin: 40px 20px; /* Отступы вокруг карточек */
+}
+
+.card {
+    background-color: white; /* Белый фон для карточек */
+    border: 1px solid #ddd; /* Светло-серая обводка */
+    border-radius: 10px; /* Закругленные углы */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Тень для карточек */
+    margin: 15px; /* Отступ между карточками */
+    padding: 20px; /* Внутренние отступы */
+    width: 300px; /* Ширина карточек */
+    text-align: center; /* Выравнивание текста внутри карточек */
+}
+
+.card h3 {
+    color: #cd89bc; /* Нежно-розовый заголовок карточки */
+    margin-top: 0; /* Убираем верхний отступ */
+}
+
+footer {
+    font-family: "Lora";
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Полупрозрачный белый фон для подвала */
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.content-box {
+    background-color: rgba(255, 255, 255, 0.8); /* Полупрозрачный белый фон */
+    border-radius: 15px; /* Закругленные углы */
+    padding: 20px; /* Внутренние отступы */
+    max-width: 400px; /* Максимальная ширина контейнера */
+    margin: 20px auto; /* Центрирование контейнера */
+    text-align: center; /* Выравнивание текста по центру */
+}
+
+.form-group {
+    margin-bottom: 25px; /* Отступ между полями формы */
+}
+
+label {
+    display: block; /* Отображение метки как блочный элемент */
+    margin-bottom: 5px; /* Отступ снизу */
+}
+
+input[type="text"],
+input[type="date"],
+input[type="email"],
+input[type="tel"],
+input[type="password"] {
+    width: 80%; /* Ширина 100% от контейнера */
+    padding: 10px; /* Внутренние отступы */
+    border: 1px solid #ccc; /* Светло-серая обводка */
+    border-radius: 5px; /* Закругленные углы */
+}
+
+
+
+

@@ -2,6 +2,9 @@
 // Подключение к базе данных
 require 'db.php';
 
+// Стартуем сессию для хранения user_id
+session_start();
+
 // Обработка POST-запроса
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Получение данных из POST-запроса
@@ -24,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $stmt = $conn->prepare($sql);
-    
+
     if (!$stmt) {
         error_log("Ошибка при подготовке запроса для проверки идентификатора: " . $conn->error);
         $response = [
@@ -49,6 +52,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $result->fetch_assoc();
         // Проверка пароля
         if (password_verify($password, $user['password'])) {
+            // Сохраняем user_id в сессии
+            session_start();
+            $_SESSION['user_id'] = $user['id'];  // Сохраняем user_id в сессии
+
             // Получаем роль по role_id
             $role_id = $user['role_id'];
             $role = '';

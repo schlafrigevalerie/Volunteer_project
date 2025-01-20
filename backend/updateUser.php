@@ -1,20 +1,23 @@
-// updateUser.php
 <?php
+session_start(); // Начинаем сессию для работы с данными пользователя
+
 require 'db.php';
 
-$data = json_decode(file_get_contents('php://input'), true);
-
 // Получаем данные из запроса
+$data = json_decode(file_get_contents('php://input'), true);
 $first_name = $data['first_name'];
 $last_name = $data['last_name'];
+$middle_name = $data['middle_name']; // Добавляем отчество
+$birth_date = $data['birth_date'];   // Добавляем дату рождения
 $email = $data['email'];
 $phone_number = $data['phone_number'];
-$user_id = $_SESSION['user_id']; // Предполагается, что у вас есть идентификатор пользователя в сессии
 
-// Обновляем данные в базе
-$sql = "UPDATE users SET first_name = ?, last_name = ?, email = ?, phone_number = ? WHERE id = ?";
+// Предполагаем, что в сессии хранится id пользователя
+$user_id = $_SESSION['user_id'];
+
+$sql = "UPDATE users SET first_name = ?, last_name = ?, middle_name = ?, birth_date = ?, email = ?, phone_number = ? WHERE id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ssssi", $first_name, $last_name, $email, $phone_number, $user_id);
+$stmt->bind_param("ssssssi", $first_name, $last_name, $middle_name, $birth_date, $email, $phone_number, $user_id);
 
 if ($stmt->execute()) {
     echo json_encode(['status' => 'success']);

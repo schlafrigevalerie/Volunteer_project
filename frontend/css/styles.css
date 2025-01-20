@@ -156,10 +156,11 @@ footer {
     font-family: "Lora";
     text-align: center;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8); /* Полупрозрачный белый фон для подвала */
+    background-color: rgba(229, 212, 255);
     position: relative;
     bottom: 0;
     width: 100%;
+    border: 2px solid #000;
 }
 
 .form-group {
@@ -242,6 +243,9 @@ input[type="password"] {
     border-radius: 50%; /* Округляем края картинки */
     border: 2px solid #000; /* Добавляем обводку черным цветом */
 }
+
+
+
 
 
 

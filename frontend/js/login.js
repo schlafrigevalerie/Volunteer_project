@@ -9,6 +9,8 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     })
     .then(response => response.json())
     .then(data => {
+        console.log(data); // Логируем ответ с сервера для отладки
+
         if (data.status === 'success') {
             // Сохраняем данные о пользователе в localStorage
             localStorage.setItem('userName', data.user_name);
@@ -20,7 +22,15 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
             localStorage.setItem('email', data.email);
 
             alert(data.message); // Успешная авторизация
-            window.location.href = 'home-avt.html'; // Перенаправление на страницу после успешной авторизации
+
+            // Перенаправление в зависимости от роли
+            if (data.role === 'job_seeker') {
+                window.location.href = 'home-avt.html'; // Для соискателя
+            } else if (data.role === 'employer') {
+                window.location.href = 'home_avt_employer.html'; // Для работодателя
+            } else {
+                window.location.href = 'home.html'; // На случай, если роль неизвестна
+            }
         } else {
             alert('Ошибка: ' + data.message); // Обработка ошибок
         }

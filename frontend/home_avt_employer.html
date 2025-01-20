@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карьера с сердцем</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        window.onload = function() {
+            // Получаем имя пользователя из localStorage
+            const userName = localStorage.getItem('userName');
+            if (userName) {
+                // Отображаем приветствие с именем пользователя
+                document.getElementById('greeting').textContent = `Привет, ${userName}`;
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="home-avt.html"><img src="images/rose.png" alt="Логотип"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="jobs.html">Вакансии</a></li>
+                    <li><a href="partners.html">Компании-партнёры</a></li>
+                    <li><a href="faq.html">Ответы на вопросы</a></li>
+                    <li><a href="faq.html">Информация</a></li>
+                    <li><a href="faq.html">Рекомендации</a></li>
+                </ul>
+            </nav>
+            <div class="auth-links">
+                <a href="lk-emp.html" class="button">Личный кабинет</a>
+                <a href="home.html" class="login-button">Выйти</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        
+        <div class="content-box-greetings">
+        <h1 id="greeting">Добрый день!</h1>  <!-- Здесь будет отображаться имя пользователя -->
+        </div>
+        <!-- Контейнер для текста и картинки -->
+        <div class="content-box-container">
+            <div class="content-box">
+                <h2>Мы хотим выразить свою благодарность за то, что вы рассматриваете возможность трудоустройства людей с синдромом Дауна в вашей компании. Мы верим, что каждый человек имеет право на равные возможности и достойную работу, независимо от его ограничений.</h2>
+            </div>
+            <div class="image-container">
+                <img src="images/girl.png" alt="Девушка" class="girl-image">
+            </div>
+        </div>
+        <div class="content-box-greetings">
+            <h1>Убедительная просьба изучить разделы "Информация" и "Рекомендации" для того, чтобы иметь полную информацию об особенностях людей с синдромом Дауна для комфорта обеих сторон</h1> 
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2023 Карьера с сердцем. Все права защищены.</p>
+    </footer>
+</body>
+</html>

@@ -49,12 +49,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $result->fetch_assoc();
         // Проверка пароля
         if (password_verify($password, $user['password'])) {
+            // Получаем роль по role_id
+            $role_id = $user['role_id'];
+            $role = '';
+
+            // Преобразуем role_id в текстовую роль
+            if ($role_id == 1) {
+                $role = 'job_seeker'; // Соискатель
+            } elseif ($role_id == 2) {
+                $role = 'employer'; // Работодатель
+            }
+
             // Успешная авторизация
-            // Мы можем комбинировать имя, фамилию и отчество для полного имени
-            $fullName = $user['first_name'] . ' ' . $user['last_name'];
             $response = [
                 'status' => 'success',
                 'message' => 'Вы успешно вошли в систему!',
+                'role' => $role, // Роль, отправленная клиенту
                 'user_name' => $user['first_name'] . ' ' . $user['last_name'],
                 'first_name' => $user['first_name'],
                 'last_name' => $user['last_name'],
@@ -71,8 +81,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ];
         }
     }
-    
-    
 
     // Закрытие соединения
     $conn->close();
@@ -82,4 +90,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo json_encode($response);
     exit;
 }
-?>

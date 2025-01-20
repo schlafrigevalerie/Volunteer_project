@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<style>/* Стили для модального окна */
+    .modal {
+        display: none; /* Скрыто по умолчанию */
+        position: fixed; /* Фиксируется на экране */
+        z-index: 1; /* Слой поверх остального контента */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон */
+    }
+    
+    .modal-content {
+        background-color: #fff;
+        margin: 10% auto;
+        padding: 20px;
+        width: 80%;
+        max-width: 400px;
+        border-radius: 10px;
+    }
+    
+    .close {
+        color: #aaa;
+        font-size: 28px;
+        font-weight: bold;
+        float: right;
+    }
+    
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+    input[type="text"], input[type="tel"], input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+</style>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="home_avt_employer.html"><img src="images/rose.png" alt="Логотип"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="jobs.html">Вакансии</a></li>
+                    <li><a href="partners.html">Компании-партнёры</a></li>
+                    <li><a href="faq.html">Ответы на вопросы</a></li>
+                    <li><a href="faq.html">Информация</a></li>
+                    <li><a href="faq.html">Рекомендации</a></li>
+                </ul>
+            </nav>
+            <div class="auth-links">
+                <a href="lk-emp.html" class="button">Личный кабинет</a>
+                <a href="home.html" class="login-button">Выйти</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="content-box-greetings">
+            <h1>Личные данные</h1>
+            <p><strong>Имя:</strong> <span id="first_name"></span></p>
+            <p><strong>Фамилия:</strong> <span id="last_name"></span></p>
+            <p><strong>Отчество:</strong> <span id="middle_name"></span></p>
+            <p><strong>Дата рождения:</strong> <span id="birth_date"></span></p>
+            <p><strong>Номер телефона:</strong> <span id="phone_number"></span></p>
+            <p><strong>Email:</strong> <span id="email"></span></p>
+        </div>
+
+        <!-- Кнопка для открытия модального окна -->
+        <button id="editButton" class="button">Изменить данные</button>
+
+        <!-- Модальное окно для редактирования данных -->
+        <div id="editModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Редактировать данные</h2>
+                <form id="editForm">
+                    <label for="first_name_input">Имя:</label>
+                    <input type="text" id="first_name_input" name="first_name" required>
+
+                    <label for="last_name_input">Фамилия:</label>
+                    <input type="text" id="last_name_input" name="last_name" required>
+
+                    <label for="middle_name_input">Отчество:</label>
+                    <input type="text" id="middle_name_input" name="middle_name" required>
+
+                    <label for="birth_date_input">Дата рождения:</label>
+                    <input type="date" id="birth_date_input" name="birth_date" required>
+
+                    <label for="phone_number_input">Номер телефона:</label>
+                    <input type="tel" id="phone_number_input" name="phone_number" required>
+
+                    <label for="email_input">Email:</label>
+                    <input type="email" id="email_input" name="email" required>
+
+                    <button type="submit" class="button">Сохранить изменения</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="content-box-greetings">
+            <h2>Добавьте информацию о компании</h2>
+            <a href="company.html" class="button">Добавить компанию</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Карьера с сердцем. Все права защищены.</p>
+    </footer>
+
+    <!-- Подключаем внешний JS-файл -->
+    <script src="js/lk.js"></script>
+</body>
+</html>

@@ -9,49 +9,6 @@
     <title>Личный кабинет</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<style>/* Стили для модального окна */
-    .modal {
-        display: none; /* Скрыто по умолчанию */
-        position: fixed; /* Фиксируется на экране */
-        z-index: 1; /* Слой поверх остального контента */
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон */
-    }
-    
-    .modal-content {
-        background-color: #fff;
-        margin: 10% auto;
-        padding: 20px;
-        width: 80%;
-        max-width: 400px;
-        border-radius: 10px;
-    }
-    
-    .close {
-        color: #aaa;
-        font-size: 28px;
-        font-weight: bold;
-        float: right;
-    }
-    
-    .close:hover,
-    .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
-    
-    input[type="text"], input[type="tel"], input[type="email"] {
-        width: 100%;
-        padding: 10px;
-        margin: 10px 0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-</style>
 <body>
     <header>
         <div class="header-content">
@@ -85,37 +42,8 @@
             <p><strong>Email:</strong> <span id="email"></span></p>
         </div>
 
-        <!-- Кнопка для открытия модального окна -->
-        <button id="editButton" class="button">Изменить данные</button>
-
-        <!-- Модальное окно для редактирования данных -->
-        <div id="editModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Редактировать данные</h2>
-                <form id="editForm">
-                    <label for="first_name_input">Имя:</label>
-                    <input type="text" id="first_name_input" name="first_name" required>
-
-                    <label for="last_name_input">Фамилия:</label>
-                    <input type="text" id="last_name_input" name="last_name" required>
-
-                    <label for="middle_name_input">Отчество:</label>
-                    <input type="text" id="middle_name_input" name="middle_name" required>
-
-                    <label for="birth_date_input">Дата рождения:</label>
-                    <input type="date" id="birth_date_input" name="birth_date" required>
-
-                    <label for="phone_number_input">Номер телефона:</label>
-                    <input type="tel" id="phone_number_input" name="phone_number" required>
-
-                    <label for="email_input">Email:</label>
-                    <input type="email" id="email_input" name="email" required>
-
-                    <button type="submit" class="button">Сохранить изменения</button>
-                </form>
-            </div>
-        </div>
+        <!-- Ссылка на страницу редактирования данных -->
+        <a href="update-data.html" class="button">Изменить данные</a>
 
         <div class="content-box-greetings">
             <h2>Добавьте информацию о компании</h2>
@@ -127,7 +55,6 @@
         <p>&copy; 2023 Карьера с сердцем. Все права защищены.</p>
     </footer>
 
-    <!-- Подключаем внешний JS-файл -->
     <script src="js/lk.js"></script>
 </body>
 </html>

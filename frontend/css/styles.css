@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: url('../images/flowers.jpg'); /* Установка фона */
+    background-color: #F1EAFF;
     background-size:130% auto;/* Заполнение всего экрана */
     background-repeat: no-repeat; /* Без повторения */
     font-family: "Lora";
@@ -10,7 +10,7 @@ body {
 }
 
 header {
-    background-color: rgba(247, 249, 223, 0.8); /* Полупрозрачный нежно-желтый фон */
+    background-color: rgba(229, 212, 255); /* Полупрозрачный нежно-желтый фон */
     border-bottom: 2px solid black; /* Черная линия */
     padding: 20px 0; /* Убираем отступы */
     margin: 0; /* Убираем отступы */
@@ -95,9 +95,11 @@ nav a {
     border-radius: 15px; /* Закругленные углы */
     padding: 20px; /* Внутренние отступы */
     max-width: 600px; /* Максимальная ширина контейнера */
+    width: 100%; /* Ширина на 100% от родительского элемента */
     margin: 20px auto; /* Центрирование контейнера */
     text-align: center; /* Выравнивание текста по центру */
 }
+
 
 h1 {
     margin: 0 0 10px; /* Убираем верхний отступ и добавляем нижний */
@@ -160,15 +162,6 @@ footer {
     width: 100%;
 }
 
-.content-box {
-    background-color: rgba(255, 255, 255, 0.8); /* Полупрозрачный белый фон */
-    border-radius: 15px; /* Закругленные углы */
-    padding: 20px; /* Внутренние отступы */
-    max-width: 50%; /* Максимальная ширина контейнера */
-    margin: 20px auto; /* Центрирование контейнера */
-    text-align: center; /* Выравнивание текста по центру */
-}
-
 .form-group {
     margin-bottom: 25px; /* Отступ между полями формы */
 }
@@ -202,6 +195,52 @@ input[type="password"] {
     padding: 10px; /* Внутренние отступы */
     border: 1px solid #ccc; /* Светло-серая обводка */
     border-radius: 5px; /* Закругленные углы */
+}
+
+.content-box-container {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 20px;
+}
+
+
+.content-box-greetings{
+    background-color: rgba(255, 255, 255, 0.8); /* Полупрозрачный белый фон */
+    border-radius: 15px; /* Закругленные углы */
+    padding: 20px; /* Внутренние отступы */
+    max-width: 600px; /* Максимальная ширина контейнера */
+    width: 100%; /* Ширина на 100% от родительского элемента */
+    margin: 20px auto; /* Центрирование контейнера */
+    text-align: center; /* Выравнивание текста по центру */
+    border: 2px solid #000; /* Добавляем обводку черным цветом */
+}
+
+
+.content-box {
+    background-color: rgba(255, 255, 255, 0.8); /* Полупрозрачный белый фон */
+    border-radius: 15px; /* Закругленные углы */
+    padding: 20px; /* Внутренние отступы */
+    max-width: 600px; /* Максимальная ширина контейнера */
+    width: 100%; /* Ширина на 100% от родительского элемента */
+    margin: 20px auto; /* Центрирование контейнера */
+    text-align: center; /* Выравнивание текста по центру */
+    margin-right: 300px; /* Сдвигаем картинку ближе к блоку с текстом */
+    border: 2px solid #000; /* Добавляем обводку черным цветом */
+}
+
+
+.image-container {
+    flex-basis: 30%;; /* Уменьшаем ширину контейнера с картинкой */
+    margin-left: 200px; /* Сдвигаем картинку ближе к блоку с текстом */
+}
+
+.girl-image {
+    width: 100%; /* Растягиваем картинку по контейнеру */
+    height: auto; /* Сохраняем пропорции картинки */
+    border-radius: 50%; /* Округляем края картинки */
+    border: 2px solid #000; /* Добавляем обводку черным цветом */
 }
 
 

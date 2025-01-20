@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-image: url('../images/flowers.jpg'); /* Установка фона */
+    background-color: url('../images/flowers.jpg'); /* Установка фона */
     background-size:130% auto;/* Заполнение всего экрана */
     background-repeat: no-repeat; /* Без повторения */
     font-family: "Lora";
@@ -164,7 +164,7 @@ footer {
     background-color: rgba(255, 255, 255, 0.8); /* Полупрозрачный белый фон */
     border-radius: 15px; /* Закругленные углы */
     padding: 20px; /* Внутренние отступы */
-    max-width: 400px; /* Максимальная ширина контейнера */
+    max-width: 50%; /* Максимальная ширина контейнера */
     margin: 20px auto; /* Центрирование контейнера */
     text-align: center; /* Выравнивание текста по центру */
 }
@@ -178,16 +178,33 @@ label {
     margin-bottom: 5px; /* Отступ снизу */
 }
 
+textarea{
+    width: 80%; /* Ширина 100% от контейнера */
+    padding: 10px; /* Внутренние отступы */
+    border: 1px solid #ccc; /* Светло-серая обводка */
+    border-radius: 5px;
+}
+
+select{
+    width: 80%; /* Ширина 100% от контейнера */
+    padding: 10px; /* Внутренние отступы */
+    border: 1px solid #ccc; /* Светло-серая обводка */
+    border-radius: 5px;
+}
+
 input[type="text"],
 input[type="date"],
 input[type="email"],
 input[type="tel"],
+input[type="file"],
 input[type="password"] {
     width: 80%; /* Ширина 100% от контейнера */
     padding: 10px; /* Внутренние отступы */
     border: 1px solid #ccc; /* Светло-серая обводка */
     border-radius: 5px; /* Закругленные углы */
 }
+
+
 
 
 

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="home-avt.html"><img src="images/rose.png" alt="Логотип"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="jobs.html">Вакансии</a></li>
+                    <li><a href="partners.html">Компании-партнёры</a></li>
+                    <li><a href="faq.html">Ответы на вопросы</a></li>
+                </ul>
+            </nav>
+            <div class="auth-links">
+                <a href="lk.html" class="register-button">Личный кабинет</a>
+                <a href="home.html" class="login-button">Выйти</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="content-box">
+            <h1>Моё резюме</h1>
+            <form id="registrationForm"> 
+                <div class="form-group">
+                    <label for="sex">Укажи свой пол</label>
+                    <select id="sex" name="sex" required>
+                        <option value="" disabled selected>-- Укажи пол --</option>
+                        <option value="job_seeker">Мужской</option>
+                        <option value="employer">Женщина</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="education">Выбери своё образование</label>
+                    <select id="education" name="education" required>
+                        <option value="" disabled selected>-- Выберите роль --</option>
+                        <option value="job_seeker">Окончил(а) 9 классов</option>
+                        <option value="employer">Окончил(а) 11 классов</option>
+                        <option value="employer">Окончил(а) колледж</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="dream">Расскажи нам немного себе! Может быть, у тебя есть мечта?</label>
+                    <textarea id="dream" name="dream" rows="5" cols="33"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="skills">Расскажи о своих навках! Что ты умеешь лучше всего?</label>
+                    <textarea id="skills" name="skills" rows="5" cols="33"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="photo">Прикрепи своё фото!</label>
+                    <input type="file" id="photo" name="photo" required>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="agree" name="agree" required>
+                    <label for="agree">Согласен на обработку персональных данных</label>
+                </div>
+                <button type="submit" class="button small-button">Сохранить!</button>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2023 Карьера с сердцем. Все права защищены.</p>
+    </footer>
+    <script src="js/app.js"></script> 
+</body>
+</html>
+

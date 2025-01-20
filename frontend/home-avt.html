@@ -8,12 +8,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Карьера с сердцем</title>
     <link rel="stylesheet" href="css/styles.css">
+    <script>
+        window.onload = function() {
+            // Получаем имя пользователя из localStorage
+            const userName = localStorage.getItem('userName');
+            if (userName) {
+                // Отображаем приветствие с именем пользователя
+                document.getElementById('greeting').textContent = `Привет, ${userName}`;
+            }
+        }
+    </script>
 </head>
 <body>
     <header>
         <div class="header-content">
             <div class="logo">
-                <a href="index.html"><img src="images/rose.png" alt="Логотип"></a>
+                <a href="home-avt.html"><img src="images/rose.png" alt="Логотип"></a>
             </div>
             <nav>
                 <ul>
@@ -23,28 +33,27 @@
                 </ul>
             </nav>
             <div class="auth-links">
-                <a href="login.html" class="login-button">Авторизация</a>
-                <a href="index.html" class="button">Регистрация</a>
+                <a href="lk.html" class="button">Личный кабинет</a>
+                <a href="home.html" class="login-button">Выйти</a>
             </div>
         </div>
     </header>
     <main>
         <div class="content-box"> 
-	    <h1>Карьера с сердцем</h1>
-	    <h4>Безопасное трудоустройство людей с синдромом Дауна</h4>
-	</div>
-	<section class="motivational-cards">
+            <h1 id="greeting">Привет!</h1>  <!-- Здесь будет отображаться имя пользователя -->
+        </div>
+        <div class="content-box"> 
+            <h2>Ты сделал первый шаг к своей мечте - найти работу, которая тебе нравится и в которой ты можешь раскрыть свой потенциал. Мы верим в тебя и хотим помочь тебе на этом пути.</h2>
+        </div> 
+
+        <div class="content-box"> 
+            <h2>На нашем сайте ты найдешь множество возможностей для поиска работы, а также полезные советы и рекомендации, которые помогут тебе подготовиться к собеседованию и построить успешную карьеру.</h2>
+        </div> 
+        
+        <section class="motivational-cards">
             <div class="card">
-                <h3>Каждый достоин шанса</h3>
-                <p>Мы верим, что каждый человек имеет право на достойную работу и развитие.</p>
-            </div>
-            <div class="card">
-                <h3>Сила в разнообразии</h3>
-                <p>Разнообразие делает нас сильнее. Мы поддерживаем инклюзивность на рабочем месте.</p>
-            </div>
-            <div class="card">
-                <h3>Вместе мы можем больше</h3>
-                <p>Объединив усилия, мы можем создать лучшее будущее для всех.</p>
+                <h3>Не волнуйся!</h3>
+                <p>Не переживай! Здесь тебя не осудят за твои особенности, а лишь поддержат их!</p>
             </div>
         </section>
 
@@ -58,5 +67,3 @@
     </footer>
 </body>
 </html>
-
-

@@ -10,11 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Проверка, является ли идентификатор email или номером телефона
     if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
-        // Это email
         $sql = "SELECT * FROM users WHERE email = ?";
     } elseif (preg_match('/^\+?[0-9]{10,15}$/', $identifier)) {
-        // Это номер телефона (можно настроить регулярное выражение под ваши требования)
-        $sql = "SELECT * FROM users WHERE phone = ?";
+        $sql = "SELECT * FROM users WHERE phone_number = ?";
     } else {
         // Неверный формат
         $response = [
@@ -52,9 +50,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Проверка пароля
         if (password_verify($password, $user['password'])) {
             // Успешная авторизация
+            // Мы можем комбинировать имя, фамилию и отчество для полного имени
+            $fullName = $user['first_name'] . ' ' . $user['last_name'];
             $response = [
                 'status' => 'success',
-                'message' => 'Вы успешно вошли в систему!'
+                'message' => 'Вы успешно вошли в систему!',
+                'user_name' => $user['first_name'] . ' ' . $user['last_name'],
+                'first_name' => $user['first_name'],
+                'last_name' => $user['last_name'],
+                'middle_name' => $user['middle_name'],
+                'birth_date' => $user['birth_date'],
+                'phone_number' => $user['phone_number'],
+                'email' => $user['email']
             ];
         } else {
             // Неверный пароль
@@ -64,11 +71,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ];
         }
     }
+    
+    
 
     // Закрытие соединения
     $conn->close();
 
     // Возвращаем ответ в формате JSON
     header('Content-Type: application/json');
-   
-
+    echo json_encode($response);
+    exit;
+}
+?>

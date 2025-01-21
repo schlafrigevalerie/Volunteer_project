@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="home_avt_employer.html"><img src="images/rose.png" alt="Логотип"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="jobs.html">Вакансии</a></li>
+                    <li><a href="partners.html">Компании-партнёры</a></li>
+                    <li><a href="faq.html">Ответы на вопросы</a></li>
+                    <li><a href="faq.html">Информация</a></li>
+                    <li><a href="faq.html">Рекомендации</a></li>
+                </ul>
+            </nav>
+            <div class="auth-links">
+                <a href="lk-emp.html" class="button">Личный кабинет</a>
+                <a href="home.html" class="login-button">Выйти</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="content-box-greetings">
+            <h1>Добавить компанию</h1>
+            <form action="../backend/save_company.php" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="name">Укажите название компании</label>
+                    <input type="text" id="name" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="description">Укажите описание компании</label>
+                    <textarea id="description" name="description" rows="5" cols="33"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="industry">Укажите сферу деятельности</label>
+                    <select id="industry" name="industry" required>
+                        <option value="" disabled selected>-- Сфера деятельности --</option>
+                        <option value="Ремесленные профессии">Ремесленные профессии</option>
+                        <option value="Здравоохранение и уход">Здравоохранение и уход</option>
+                        <option value="Уход за животными">Уход за животными</option>
+                        <option value="Креативные профессии">Креативные профессии</option>
+                        <option value="Розничная торговля">Розничная торговля</option>
+                        <option value="Гостиничный и ресторанный бизнес">Гостиничный и ресторанный бизнес</option>
+                        <option value="Транспорт и логистика">Транспорт и логистика</option>
+                        <option value="Другое">Другое</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="agree" name="agree" required>
+                    <label for="agree">Согласен на обработку персональных данных</label>
+                </div>
+                <button type="submit" class="button small-button">Сохранить!</button>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2023 Карьера с сердцем. Все права защищены.</p>
+    </footer>
+</body>
+</html>

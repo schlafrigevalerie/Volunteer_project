@@ -75,6 +75,7 @@ nav a {
     color: #333; /* Темный текст */
     padding: 10px 15px;
     border-radius: 5px;
+    cursor: pointer;
     border: 1px solid #333; /* Обводка для кнопки авторизации */
 }
 
@@ -83,6 +84,7 @@ nav a {
     color: white; /* Белый текст */
     padding: 10px 15px;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .register-button:hover {
@@ -122,6 +124,7 @@ main {
     border-radius: 5px; /* Закругленные углы */
     background-color: #cd89bc; /* Цвет кнопки */
     color: white; /* Цвет текста кнопки */
+    cursor: pointer;
     /*cursor: pointer; /* Указатель при наведении */
 }
 

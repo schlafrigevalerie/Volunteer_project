@@ -101,9 +101,24 @@
             <p><strong>Номер телефона:</strong> <span id="phone_number">+7 (999) 123-45-67</span><button class="edit-button" data-field="phone_number">Изменить</button></p>
             <p><strong>Email:</strong> <span id="email">ivanov@mail.ru</span><button class="edit-button" data-field="email">Изменить</button></p>
         </div>
+
+        <!-- Блок информации о компании -->
         <div class="content-box-greetings">
-            <h2>Добавьте информацию о компании</h2>
-            <a href="add_company.html" class="button">Добавить компанию</a>
+            <h2>Информация о компании</h2>
+
+            <!-- Если компания существует, отображаем её информацию -->
+            <div id="company-info" style="display: none;">
+                <p><strong>Название компании:</strong> <span id="company-name"></span> <button class="edit-button" data-field="company-name">Изменить</button></p>
+                <p><strong>Описание:</strong> <span id="company-description"></span> <button class="edit-button" data-field="company-description">Изменить</button></p>
+                <p><strong>Отрасль:</strong> <span id="company-industry"></span> <button class="edit-button" data-field="company-industry">Изменить</button></p>
+                <button id="delete-company" class="edit-button">Удалить компанию</button>
+            </div>
+
+            <!-- Если компании нет, показываем кнопку для добавления компании -->
+            <div id="create-company" style="display: none;">
+                <h3>У вас нет компании. Добавьте её сейчас!</h3>
+                <a href="add_company.html" class="button">Добавить компанию</a>
+            </div>
         </div>
     </main>
 
@@ -126,65 +141,119 @@
 
     <script src="js/lk.js"></script>
     <script>
-        const editButtons = document.querySelectorAll('.edit-button');
-        const modal = document.getElementById('editModal');
-        const closeModal = document.getElementById('closeModal');
-        const editForm = document.getElementById('editForm');
-        let currentField = null;
+        document.addEventListener('DOMContentLoaded', function() {
+            // Получаем id текущего работодателя
+            const userId = 1; // Пример ID пользователя (замените на динамическое значение)
+            
+            fetch(`../backend/get_company.php?user_id=${userId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success && data.company) {
+                        // Если компания найдена, отображаем её
+                        document.getElementById('company-info').style.display = 'block';
+                        document.getElementById('company-name').textContent = data.company.name || 'Не указано';
+                        document.getElementById('company-description').textContent = data.company.description || 'Не указано';
+                        document.getElementById('company-industry').textContent = data.company.industry || 'Не указано';
+                        
+                        // Отображаем кнопку для удаления компании
+                        document.getElementById('delete-company').style.display = 'inline-block';
 
-        // Открытие модального окна при нажатии на кнопку "Изменить"
-        editButtons.forEach(button => {
-            button.onclick = function() {
-                const field = this.getAttribute('data-field');
-                currentField = field;
-                const fieldValue = document.getElementById(field).textContent || document.getElementById(field).value;
-                document.getElementById('editLabel').textContent = `Введите новое значение для ${field.charAt(0).toUpperCase() + field.slice(1)}:`;
-                document.getElementById('editValue').value = fieldValue.trim();
-                modal.style.display = "block";
-            };
-        });
+                        // Скрываем кнопку добавления компании
+                        document.getElementById('create-company').style.display = 'none';
+                    } else {
+                        // Если компании нет, показываем кнопку для её добавления
+                        document.getElementById('create-company').style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка при загрузке компании:', error);
+                });
 
-        // Закрытие модального окна
-        closeModal.onclick = function() {
-            modal.style.display = "none";
-        };
-
-        // Закрытие модального окна при клике за пределы
-        window.onclick = function(event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
+            // Удаление компании
+            const deleteButton = document.getElementById('delete-company');
+            if (deleteButton) {
+                deleteButton.addEventListener('click', function() {
+                    if (confirm("Вы уверены, что хотите удалить компанию?")) {
+                        fetch('../backend/delete_company.php', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                            body: new URLSearchParams({ user_id: userId })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert('Компания успешно удалена!');
+                                location.reload(); // Перезагружаем страницу
+                            } else {
+                                alert('Ошибка при удалении компании: ' + data.message);
+                            }
+                        })
+                        .catch(error => {
+                            alert('Ошибка при удалении компании: ' + error);
+                        });
+                    }
+                });
             }
-        };
 
-        // Обработка формы редактирования
-        editForm.onsubmit = function(event) {
-            event.preventDefault();
-            const updatedValue = document.getElementById('editValue').value;
+            
+    // Обработка кнопок "Изменить" для данных пользователя
+    const editButtons = document.querySelectorAll('.edit-button');
+    editButtons.forEach(button => {
+        button.onclick = function() {
+            const field = this.getAttribute('data-field');
+            const fieldValue = document.getElementById(field).textContent.trim();
+            const modal = document.getElementById('editModal');
+            const editLabel = document.getElementById('editLabel');
+            const editValue = document.getElementById('editValue');
+            const currentField = field;
 
-            // Обновляем данные на странице
-            document.getElementById(currentField).textContent = updatedValue;
+            editLabel.textContent = `Введите новое значение для ${field.charAt(0).toUpperCase() + field.slice(1)}:`;
+            editValue.value = fieldValue;
+            modal.style.display = "block";
 
-            // Отправляем обновленные данные на сервер
-            const updatedData = { [currentField]: updatedValue };
+            const editForm = document.getElementById('editForm');
+            editForm.onsubmit = function(event) {
+                event.preventDefault();
+                const updatedValue = editValue.value.trim();
 
-            fetch('../backend/update_user.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams(updatedData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    alert('Данные успешно обновлены!');
-                    modal.style.display = "none";
-                } else {
-                    alert(data.message);
+                // Проверяем, что значение не пустое
+                if (!updatedValue) {
+                    alert('Значение не может быть пустым');
+                    return;
                 }
-            })
-            .catch(error => {
-                alert('Ошибка при отправке данных: ' + error);
-            });
+
+                // Отправляем обновленные данные на сервер
+                fetch('../backend/update_company.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({
+                        user_id: userId,
+                        field: currentField,
+                        value: updatedValue
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Данные компании успешно обновлены!');
+                        document.getElementById(currentField).textContent = updatedValue;
+                        modal.style.display = "none";
+                    } else {
+                        alert('Ошибка при обновлении данных: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    alert('Ошибка при отправке данных: ' + error);
+                });
+            };
         };
+    });
+
+    // Закрытие модального окна
+    document.getElementById('closeModal').addEventListener('click', function() {
+        document.getElementById('editModal').style.display = "none";
+    });
+});
     </script>
 </body>
 </html>

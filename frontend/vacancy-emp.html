@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карьера с сердцем</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="home-avt.html"><img src="images/rose.png" alt="Логотип"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="vacancy-emp.html">Вакансии</a></li>
+                    <li><a href="faq.html">Ответы на вопросы</a></li>
+                    <li><a href="faq.html">Информация</a></li>
+                    <li><a href="faq.html">Рекомендации</a></li>
+                </ul>
+            </nav>
+            <div class="auth-links">
+                <a href="lk-emp.html" class="button">Личный кабинет</a>
+                <a href="home.html" class="login-button">Выйти</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="sidebar">
+            <ul>
+                <li><button id="create-job-btn">Создать вакансию</button></li>
+                <li><a href="my-jobs.html">Мои вакансии</a></li>
+                <li><a href="responses.html">Отклики</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <h1>Вакансии</h1>
+            <div id="jobs-container"></div> 
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Карьера с сердцем. Все права защищены.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('../backend/jobs.php')  
+                .then(response => response.json())
+                .then(jobs => {
+                    const jobsContainer = document.getElementById('jobs-container');
+                    jobs.forEach(job => {
+                        const jobElement = document.createElement('div');
+                        jobElement.classList.add('job-box');
+
+                        jobElement.innerHTML = `
+                            <h3>${job.name}</h3>
+                            <p>Зарплата: ${job.salary} ₽</p>
+                            <p>Требования: ${job.requirements}</p>
+                            <p>Условия: ${job.conditions}</p>
+                            <a href="job-details.html?id=${job.id}">Подробнее о вакансии</a>
+                            <br>
+                            <a href="company-details.html?id=${job.company_id}">Подробнее о компании</a>
+                        `;
+                        
+                        jobsContainer.appendChild(jobElement);
+                    });
+                })
+                .catch(error => {
+                    console.error('Ошибка при загрузке вакансий:', error);
+                });
+        });
+    </script>
+</body>
+</html>

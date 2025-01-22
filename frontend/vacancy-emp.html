@@ -13,7 +13,7 @@
     <header>
         <div class="header-content">
             <div class="logo">
-                <a href="home-avt.html"><img src="images/rose.png" alt="Логотип"></a>
+                <a href="home_avt_employer.html"><img src="images/work-logo.svg" alt="Логотип"></a>
             </div>
             <nav>
                 <ul>
@@ -33,8 +33,7 @@
     <main>
         <div class="sidebar">
             <ul>
-                <li><button id="create-job-btn">Создать вакансию</button></li>
-                <li><a href="my-jobs.html">Мои вакансии</a></li>
+                <li><a href="add-vacancy.html">Создать вакансию</a></li>
                 <li><a href="responses.html">Отклики</a></li>
             </ul>
         </div>
@@ -64,9 +63,7 @@
                             <p>Зарплата: ${job.salary} ₽</p>
                             <p>Требования: ${job.requirements}</p>
                             <p>Условия: ${job.conditions}</p>
-                            <a href="job-details.html?id=${job.id}">Подробнее о вакансии</a>
                             <br>
-                            <a href="company-details.html?id=${job.company_id}">Подробнее о компании</a>
                         `;
                         
                         jobsContainer.appendChild(jobElement);

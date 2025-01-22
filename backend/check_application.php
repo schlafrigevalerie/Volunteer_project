@@ -1,45 +1,33 @@
 <?php
-// Включаем отображение ошибок для отладки
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-// Подключаем файл с настройками подключения
-require_once 'db.php';
-
-// Запускаем сессию, чтобы получить user_id из сессии
 session_start();
+include 'db.php'; // Подключение к базе данных
 
-// Проверяем, что user_id есть в сессии
-if (!isset($_SESSION['user_id'])) {
-    echo json_encode(['is_applied' => false, 'message' => 'Пользователь не авторизован']);
-    exit;
-}
+// Получаем ID текущего пользователя из сессии
+$user_id = $_SESSION['user_id']; 
 
-$user_id = $_SESSION['user_id'];  // Получаем user_id из сессии
-$job_id = $_POST['job_id']; // Или $_GET['job_id'] в зависимости от способа передачи
+// Получаем ID вакансии
+$job_id = $_GET['job_id'];
 
-// Логируем полученные данные
-error_log("Полученные данные: user_id = $user_id, job_id = $job_id");
-
-// Проверяем, есть ли отклик пользователя на эту вакансию
-$query = "SELECT 1 FROM responses WHERE user_id = ? AND job_id = ?";
-$stmt = $conn->prepare($query);
-
-if (!$stmt) {
-    // Логируем ошибку, если запрос не подготовился
-    error_log("Ошибка в подготовке запроса для проверки отклика: " . $conn->error);
-    echo json_encode(['is_applied' => false, 'message' => 'Ошибка в подготовке запроса для проверки отклика']);
-    exit;
-}
-
+// Проверяем, есть ли отклик этого пользователя на указанную вакансию
+$sql = "SELECT * FROM responses WHERE user_id = ? AND job_id = ?";
+$stmt = $conn->prepare($sql);
 $stmt->bind_param("ii", $user_id, $job_id);
 $stmt->execute();
-$stmt->store_result();
+$result = $stmt->get_result();
+$response = $result->fetch_assoc();
 
-$isApplied = $stmt->num_rows > 0;
-
-echo json_encode(['is_applied' => $isApplied]);
-
-$stmt->close();
-$conn->close();
+if ($response) {
+    // Если отклик есть
+    echo json_encode(['hasResponded' => true, 'resume_id' => $response['resume_id']]);
+} else {
+    // Если отклика нет, получаем ID резюме пользователя
+    $sql = "SELECT id FROM resume WHERE user_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $resume = $result->fetch_assoc();
+    
+    echo json_encode(['hasResponded' => false, 'resume_id' => $resume['id']]);
+}
 ?>

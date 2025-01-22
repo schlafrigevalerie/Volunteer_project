@@ -339,14 +339,43 @@ button:hover {
     text-decoration: underline;
 }
 
+/* Стили для контейнеров вопросов и ответов */
+.faq-container {
+    width: 100%;
+    max-width: 700px; /* Ограничиваем максимальную ширину */
+    margin: 20px auto; /* Центрируем элементы по горизонтали */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px; /* Скругленные углы */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Легкая тень */
+}
 
+/* Стили для вопроса */
+.faq-question {
+    background-color: #ffffff; /* Белый фон для вопроса */
+    padding: 15px; /* Отступы внутри контейнера */
+    border: 1px solid #f0f0f0; /* Легкая рамка вокруг контейнера */
+    color: #333333; /* Цвет текста */
+    font-weight: bold; /* Жирный шрифт для вопроса */
+}
 
+/* Стили для контейнера ответа */
+.faq-answer-container {
+    background-color: rgba(229, 212, 255, 1); /* Фон контейнера ответа */
+    padding: 15px; /* Отступы внутри контейнера */
+    border: 1px solid #d1a7f6; /* Легкая рамка вокруг контейнера */
+    margin-top: 10px; /* Отступ сверху */
+}
 
+/* Стили для самого ответа */
+.faq-answer {
+    color: #555555; /* Цвет текста для ответа */
+    font-weight: bold; /* Жирный шрифт для текста ответа */
+}
 
-
-
-
-
-
-
-
+/* Стили для контейнера с вопросами и ответами */
+.faq-questions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Отступы между блоками вопросов и ответов */
+}

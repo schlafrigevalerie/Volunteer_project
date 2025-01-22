@@ -47,10 +47,7 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Пример ID пользователя, который будет использоваться для создания отклика
-            const userId = 1; // Здесь должен быть реальный id пользователя, возможно из сессии
-
-            fetch('../backend/jobs.php')  
+            fetch('../backend/jobs.php')  // Запрос вакансий
                 .then(response => response.json())
                 .then(jobs => {
                     const jobsContainer = document.getElementById('jobs-container');
@@ -58,86 +55,68 @@
                         const jobElement = document.createElement('div');
                         jobElement.classList.add('job-box');
 
-                        // Проверяем, откликался ли пользователь на вакансию
-                        checkIfUserApplied(userId, job.id).then(isApplied => {
-                            const button = document.createElement('button');
-                            button.classList.add('apply-button');
-                            button.setAttribute('data-job-id', job.id);
-                            button.setAttribute('data-company-id', job.company_id);
-                            button.disabled = isApplied;
-
-                            if (isApplied) {
-                                button.style.backgroundColor = '#ccc'; // Серая кнопка
-                                button.innerText = 'Вы откликнулись';
-                            } else {
-                                button.style.backgroundColor = '#ffffff'; // Белая кнопка
-                                button.innerText = 'Откликнуться';
-                            }
-
-                            button.addEventListener('click', function() {
-                                if (!isApplied) {
-                                    // Отправляем отклик
-                                    applyForJob(userId, job.id, job.company_id);
-                                    button.style.backgroundColor = '#ccc'; // Серая кнопка
-                                    button.innerText = 'Вы откликнулись';
+                        // Проверка отклика пользователя на вакансию
+                        fetch(`../backend/check_application.php?job_id=${job.id}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                const button = document.createElement('a');
+                                button.classList.add('response-button');
+                                if (data.hasResponded) {
+                                    // Если отклик уже был
+                                    button.textContent = 'Вы откликнулись';
+                                    button.style.backgroundColor = 'gray';
                                     button.disabled = true;
+                                } else {
+                                    // Если отклик еще не был
+                                    button.textContent = 'Откликнуться';
+                                    button.style.backgroundColor = 'white';
                                 }
-                            });
 
-                            jobElement.innerHTML = `
-                                <h3>${job.name}</h3>
-                                <p>Зарплата: ${job.salary} ₽</p>
-                                <p>Требования: ${job.requirements}</p>
-                                <p>Условия: ${job.conditions}</p>
-                                <br>
-                            `;
-                            jobElement.appendChild(button);
-                            jobsContainer.appendChild(jobElement);
-                        });
+                                // Добавление кнопки с событием
+                                button.href = '#';
+                                button.addEventListener('click', function(event) {
+                                    event.preventDefault();
+                                    if (!data.hasResponded) {
+                                        // Добавить отклик в базу
+                                        fetch('../backend/apply_job.php.php', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json'
+                                            },
+                                            body: JSON.stringify({
+                                                job_id: job.id,
+                                                resume_id: data.resume_id  // ID резюме
+                                            })
+                                        }).then(response => response.json())
+                                          .then(result => {
+                                              if (result.success) {
+                                                  // Обновление кнопки
+                                                  button.textContent = 'Вы откликнулись';
+                                                  button.style.backgroundColor = 'gray';
+                                                  button.disabled = true;
+                                              }
+                                          });
+                                    }
+                                });
+
+                                jobElement.innerHTML = `
+                                    <h3>${job.name}</h3>
+                                    <p>Зарплата: ${job.salary} ₽</p>
+                                    <p>Требования: ${job.requirements}</p>
+                                    <p>Условия: ${job.conditions}</p>
+                                `;
+                                jobElement.appendChild(button);
+                                jobsContainer.appendChild(jobElement);
+                            })
+                            .catch(error => {
+                                console.error('Ошибка при проверке отклика:', error);
+                            });
                     });
                 })
                 .catch(error => {
                     console.error('Ошибка при загрузке вакансий:', error);
                 });
         });
-
-        // Функция для проверки, откликался ли пользователь на вакансию
-        function checkIfUserApplied(userId, jobId) {
-            return fetch('../backend/check_application.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ user_id: userId, job_id: jobId })
-            })
-            .then(response => response.json())
-            .then(data => data.is_applied)
-            .catch(error => {
-                console.error('Ошибка при проверке отклика:', error);
-                return false;
-            });
-        }
-
-        // Функция для отправки отклика на вакансию
-        function applyForJob(userId, jobId, companyId) {
-            fetch('../backend/apply_job.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ user_id: userId, job_id: jobId, company_id: companyId })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (!data.success) {
-                    alert('Произошла ошибка при отклике.');
-                }
-            })
-            .catch(error => {
-                console.error('Ошибка при отклике:', error);
-                alert('Произошла ошибка.');
-            });
-        }
     </script>
 </body>
 </html>

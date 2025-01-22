@@ -17,7 +17,7 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="vacancy-emp.html">Найти работу!</a></li>
+                    <li><a href="vacancy.html">Найти работу!</a></li>
                     <li><a href="faq.html">Ответы на вопросы</a></li>
                 </ul>
             </nav>
@@ -31,7 +31,7 @@
     <main>
         <div class="sidebar">
             <ul>
-                <li><a href="responses.html">Мои отклики</a></li>
+                <li><a href="user_resp.html">Мои отклики</a></li>
             </ul>
         </div>
 
@@ -41,9 +41,35 @@
         </div>
     </main>
 
-    <footer>
-        <p>&copy; 2023 Карьера с сердцем. Все права защищены.</p>
-    </footer>
+    <footer class="footer">
+        <div class="footer-container">
+          <div class="footer-section">
+            <h3>Карьера с сердцем</h3>
+            <p>Мы помогаем людям с синдромом Дауна находить работу, развивать свои таланты и строить карьеру.</p>
+          </div>
+          
+          <div class="footer-section">
+            <h4>Контакты</h4>
+            <ul>
+              <li><strong>Телефон:</strong> +7 123 456 78 90</li>
+              <li><strong>Email:</strong> info@career-heart.ru</li>
+              <li><strong>Адрес:</strong> Москва, ул. Примерная, д. 15</li>
+            </ul>
+          </div>
+          
+          <div class="footer-section">
+            <h4>Следите за нами</h4>
+            <div class="social-links">
+              <a href="https://facebook.com" class="social-icon facebook">Вконтакте</a>
+              <a href="https://twitter.com" class="social-icon twitter">Телеграм</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>&copy; 2025 Карьера с сердцем. Все права защищены.</p>
+        </div>
+      </footer>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -64,7 +90,7 @@
                                 if (data.hasResponded) {
                                     // Если отклик уже был
                                     button.textContent = 'Вы откликнулись';
-                                    button.style.backgroundColor = 'gray';
+                                    button.style.backgroundColor = '#BDECB6';
                                     button.disabled = true;
                                 } else {
                                     // Если отклик еще не был
@@ -78,7 +104,7 @@
                                     event.preventDefault();
                                     if (!data.hasResponded) {
                                         // Добавить отклик в базу
-                                        fetch('../backend/apply_job.php.php', {
+                                        fetch('../backend/apply_job.php', {
                                             method: 'POST',
                                             headers: {
                                                 'Content-Type': 'application/json'

@@ -6,61 +6,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Личный кабинет</title>
+    <title>Мои отклики</title>
     <link rel="stylesheet" href="css/styles.css">
-    <script>
-        // Функция для показа уведомления перед отправкой формы
-        function showSuccessMessage() {
-            alert("Вакансия сохранена");
-        }
-    </script>
 </head>
 <body>
     <header>
         <div class="header-content">
             <div class="logo">
-                <a href="home_avt_employer.html"><img src="images/work-logo.svg" alt="Логотип"></a>
+                <a href="home-avt.html"><img src="images/work-logo.svg" alt="Логотип"></a>
             </div>
             <nav>
                 <ul>
-                    <li><a href="vacancy-emp.html">Вакансии</a></li>
+                    <li><a href="vacancy.html">Найти работу!</a></li>
                     <li><a href="faq.html">Ответы на вопросы</a></li>
-                    <li><a href="faq.html">Информация</a></li>
-                    <li><a href="faq.html">Рекомендации</a></li>
                 </ul>
             </nav>
             <div class="auth-links">
-                <a href="lk-emp.html" class="button">Личный кабинет</a>
+                <a href="lk.html" class="button">Личный кабинет</a>
                 <a href="home.html" class="login-button">Выйти</a>
             </div>
         </div>
     </header>
 
     <main>
-        <div class="content-box-greetings">
-            <h1>Добавить вакансию</h1>
-            <form action="../backend/save_vacancy.php" method="POST" enctype="multipart/form-data" onsubmit="showSuccessMessage()">
-                <div class="form-group">
-                    <label for="name">Укажите название вакансии</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="salary">Укажите заработную плату</label>
-                    <input type="text" id="salary" name="salary" required>
-                </div>
-                <div class="form-group">
-                    <label for="requirements">Укажите требования к вакансии</label>
-                    <textarea id="requirements" name="requirements" rows="5" cols="33" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="conditions">Укажите условия работы</label>
-                    <textarea id="conditions" name="conditions" rows="5" cols="33" required></textarea>
-                </div>
-                <button type="submit" class="button small-button">Сохранить!</button>
-            </form>
+        <div class="sidebar">
+            <ul>
+                <li><a href="vacancy.html">Все вакансии</a></li>
+            </ul>
         </div>
-        <li><a href="vacancy-emp.html" class="login-button">Назад</a></li>
+
+        <div class="content">
+            <h1>Мои откликнутые вакансии</h1>
+            <div id="applied-jobs-container"></div> 
+        </div>
     </main>
+
     <footer class="footer">
         <div class="footer-container">
           <div class="footer-section">
@@ -90,5 +70,31 @@
           <p>&copy; 2025 Карьера с сердцем. Все права защищены.</p>
         </div>
       </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('../backend/get_applied_jobs.php')  // Запрос откликнутых вакансий
+                .then(response => response.json())
+                .then(jobs => {
+                    const jobsContainer = document.getElementById('applied-jobs-container');
+                    jobs.forEach(job => {
+                        const jobElement = document.createElement('div');
+                        jobElement.classList.add('job-box');
+
+                        jobElement.innerHTML = `
+                            <h3>${job.name}</h3>
+                            <p>Зарплата: ${job.salary} ₽</p>
+                            <p>Требования: ${job.requirements}</p>
+                            <p>Условия: ${job.conditions}</p>
+                            <p>Статус: Вы откликнулись</p>
+                        `;
+                        jobsContainer.appendChild(jobElement);
+                    });
+                })
+                .catch(error => {
+                    console.error('Ошибка при загрузке откликнутых вакансий:', error);
+                });
+        });
+    </script>
 </body>
 </html>

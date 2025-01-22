@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отклики на вакансии</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <<header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="home_avt_employer.html"><img src="images/work-logo.svg" alt="Логотип"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="vacancy-emp.html">Вакансии</a></li>
+                    <li><a href="faq_emp.html">Ответы на вопросы</a></li>
+                    <li><a href="information.html">Информация</a></li>
+                    <li><a href="faq.html">Рекомендации</a></li>
+                </ul>
+            </nav>
+            <div class="auth-links">
+                <a href="lk-emp.html" class="button">Личный кабинет</a>
+                <a href="home.html" class="login-button">Выйти</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="sidebar">
+            <ul>
+                <li><a href="add-vacancy.html">Создать вакансию</a></li>
+                <li><a href="vacancy-emp.html">Вакансии</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <h1>Отклики на вакансии</h1>
+            <div id="responses-container"></div> <!-- Контейнер для откликов -->
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+          <div class="footer-section">
+            <h3>Карьера с сердцем</h3>
+            <p>Мы помогаем людям с синдромом Дауна находить работу, развивать свои таланты и строить карьеру.</p>
+          </div>
+          
+          <div class="footer-section">
+            <h4>Контакты</h4>
+            <ul>
+              <li><strong>Телефон:</strong> +7 123 456 78 90</li>
+              <li><strong>Email:</strong> info@career-heart.ru</li>
+              <li><strong>Адрес:</strong> Москва, ул. Примерная, д. 15</li>
+            </ul>
+          </div>
+          
+          <div class="footer-section">
+            <h4>Следите за нами</h4>
+            <div class="social-links">
+              <a href="https://facebook.com" class="social-icon facebook">Вконтакте</a>
+              <a href="https://twitter.com" class="social-icon twitter">Телеграм</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>&copy; 2025 Карьера с сердцем. Все права защищены.</p>
+        </div>
+      </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    fetch('../backend/responses.php')  // Запрос откликов
+        .then(response => response.json())
+        .then(responses => {
+            const responsesContainer = document.getElementById('responses-container');
+            if (responses.error) {
+                responsesContainer.innerHTML = `<p>${responses.error}</p>`;
+                return;
+            }
+
+            responses.forEach(response => {
+                const responseElement = document.createElement('div');
+                responseElement.classList.add('response-box');
+
+                // Блок с краткой информацией об отклике
+                const basicInfo = document.createElement('div');
+                basicInfo.classList.add('response-basic-info');
+                basicInfo.innerHTML = `
+                    <h3>Отклик от: ${response.first_name} ${response.last_name}</h3>
+                    <p>Телефон: ${response.phone_number || 'Не указан'}</p>
+                    <p>Email: ${response.email || 'Не указан'}</p>
+                    <p>Дата рождения: ${response.birth_date || 'Не указана'}</p>
+                `;
+                responseElement.appendChild(basicInfo);
+
+                // Кнопка для раскрытия полного резюме
+                const showResumeButton = document.createElement('button');
+                showResumeButton.textContent = 'Показать резюме';
+                showResumeButton.classList.add('pink-button');  // Добавляем розовый класс
+                responseElement.appendChild(showResumeButton);
+
+                // Контейнер для полного резюме
+                const resumeContainer = document.createElement('div');
+                resumeContainer.classList.add('resume-container');
+                resumeContainer.innerHTML = `
+                    <p><strong>Пол:</strong> ${response.sex || 'Не указан'}</p>
+                    <p><strong>Образование:</strong> ${response.education || 'Не указано'}</p>
+                    <p><strong>Мечта:</strong> ${response.dream || 'Не указана'}</p>
+                    <p><strong>Навыки:</strong> ${response.skills || 'Не указаны'}</p>
+                    <p><strong>Здоровье:</strong> ${response.health_features || 'Не указано'}</p>
+                    <p><strong>Фото:</strong> ${response.photo ? `<img src="${response.photo}" alt="Фото пользователя" width="100">` : 'Нет фото'}</p>
+                `;
+                resumeContainer.style.display = 'none';  // Скрыть резюме по умолчанию
+                responseElement.appendChild(resumeContainer);
+
+                // Обработчик для кнопки раскрытия резюме
+                showResumeButton.addEventListener('click', function() {
+                    if (resumeContainer.style.display === 'none') {
+                        resumeContainer.style.display = 'block';
+                        showResumeButton.textContent = 'Скрыть резюме';
+                    } else {
+                        resumeContainer.style.display = 'none';
+                        showResumeButton.textContent = 'Показать резюме';
+                    }
+                });
+
+                // Добавление отклика в контейнер
+                responsesContainer.appendChild(responseElement);
+            });
+        })
+        .catch(error => {
+            console.error('Ошибка при загрузке откликов:', error);
+        });
+});
+
+    </script>
+</body>
+</html>

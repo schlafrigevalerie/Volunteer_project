@@ -6,12 +6,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Личный кабинет</title>
+    <title>Карьера с сердцем</title>
     <link rel="stylesheet" href="css/styles.css">
     <script>
-        // Функция для показа уведомления перед отправкой формы
-        function showSuccessMessage() {
-            alert("Вакансия сохранена");
+        window.onload = function() {
+            // Получаем имя пользователя из localStorage
+            const userName = localStorage.getItem('userName');
+            if (userName) {
+                // Отображаем приветствие с именем пользователя
+                document.getElementById('greeting').textContent = `Привет, ${userName}`;
+            }
         }
     </script>
 </head>
@@ -19,47 +23,33 @@
     <header>
         <div class="header-content">
             <div class="logo">
-                <a href="home_avt_employer.html"><img src="images/work-logo.svg" alt="Логотип"></a>
+                <a href="home-avt.html"><img src="images/work-logo.svg" alt="Логотип"></a>
             </div>
             <nav>
                 <ul>
-                    <li><a href="vacancy-emp.html">Вакансии</a></li>
-                    <li><a href="faq.html">Ответы на вопросы</a></li>
-                    <li><a href="faq.html">Информация</a></li>
-                    <li><a href="faq.html">Рекомендации</a></li>
+                    <li><a href="faq_admin.html">Ответить на вопросы</a></li>
                 </ul>
             </nav>
             <div class="auth-links">
-                <a href="lk-emp.html" class="button">Личный кабинет</a>
+                <a href="lk-admin.html" class="button">Личный кабинет</a>
                 <a href="home.html" class="login-button">Выйти</a>
             </div>
         </div>
     </header>
-
     <main>
+        
         <div class="content-box-greetings">
-            <h1>Добавить вакансию</h1>
-            <form action="../backend/save_vacancy.php" method="POST" enctype="multipart/form-data" onsubmit="showSuccessMessage()">
-                <div class="form-group">
-                    <label for="name">Укажите название вакансии</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="salary">Укажите заработную плату</label>
-                    <input type="text" id="salary" name="salary" required>
-                </div>
-                <div class="form-group">
-                    <label for="requirements">Укажите требования к вакансии</label>
-                    <textarea id="requirements" name="requirements" rows="5" cols="33" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="conditions">Укажите условия работы</label>
-                    <textarea id="conditions" name="conditions" rows="5" cols="33" required></textarea>
-                </div>
-                <button type="submit" class="button small-button">Сохранить!</button>
-            </form>
+        <h1 id="greeting">Добрый день,</h1>  <!-- Здесь будет отображаться имя пользователя -->
         </div>
-        <li><a href="vacancy-emp.html" class="login-button">Назад</a></li>
+        <!-- Контейнер для текста и картинки -->
+        <div class="content-box-container">
+            <div class="content-box">
+                <h2>Твоя задача - отвечать на вопросы пользователей. Их ты можешь найти в разделе "Вопросы" в шапке страницы</h2>
+            </div>
+            <div class="image-container">
+                <img src="images/business-person.svg" alt="Девушка" class="girl-image">
+            </div>
+        </div>
     </main>
     <footer class="footer">
         <div class="footer-container">

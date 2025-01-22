@@ -73,18 +73,16 @@
     <header>
         <div class="header-content">
             <div class="logo">
-                <a href="home_avt_employer.html"><img src="images/work-logo.svg" alt="Логотип"></a>
+                <a href="home-admin.html"><img src="images/work-logo.svg" alt="Логотип"></a>
             </div>
             <nav>
                 <ul>
-                    <li><a href="vacancy-emp.html">Вакансии</a></li>
-                    <li><a href="faq.html">Ответы на вопросы</a></li>
-                    <li><a href="faq.html">Информация</a></li>
-                    <li><a href="faq.html">Рекомендации</a></li>
+                    <li><a href="faq_admin.html">Ответить на вопросы</a></li>
+
                 </ul>
             </nav>
             <div class="auth-links">
-                <a href="lk-emp.html" class="button">Личный кабинет</a>
+                <a href="lk-admin.html" class="button">Личный кабинет</a>
                 <a href="home.html" class="login-button">Выйти</a>
             </div>
         </div>
@@ -101,24 +99,7 @@
             <p><strong>Email:</strong> <span id="email">ivanov@mail.ru</span><button class="edit-button" data-field="email">Изменить</button></p>
         </div>
 
-        <!-- Блок информации о компании -->
-        <div class="content-box-greetings">
-            <h2>Информация о компании</h2>
 
-            <!-- Если компания существует, отображаем её информацию -->
-            <div id="company-info" style="display: none;">
-                <p><strong>Название компании:</strong> <span id="company-name"></span> <button class="edit-button" data-field="company-name">Изменить</button></p>
-                <p><strong>Описание:</strong> <span id="company-description"></span> <button class="edit-button" data-field="company-description">Изменить</button></p>
-                <p><strong>Отрасль:</strong> <span id="company-industry"></span> <button class="edit-button" data-field="company-industry">Изменить</button></p>
-                <button id="delete-company" class="edit-button">Удалить компанию</button>
-            </div>
-
-            <!-- Если компании нет, показываем кнопку для добавления компании -->
-            <div id="create-company" style="display: none;">
-                <h3>У вас нет компании. Добавьте её сейчас!</h3>
-                <a href="add_company.html" class="button">Добавить компанию</a>
-            </div>
-        </div>
     </main>
 
     <footer class="footer">
@@ -167,58 +148,7 @@
     <script src="js/lk.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Получаем id текущего работодателя
-            const userId = 1; // Пример ID пользователя (замените на динамическое значение)
-            
-            fetch(`../backend/get_company.php?user_id=${userId}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success && data.company) {
-                        // Если компания найдена, отображаем её
-                        document.getElementById('company-info').style.display = 'block';
-                        document.getElementById('company-name').textContent = data.company.name || 'Не указано';
-                        document.getElementById('company-description').textContent = data.company.description || 'Не указано';
-                        document.getElementById('company-industry').textContent = data.company.industry || 'Не указано';
-                        
-                        // Отображаем кнопку для удаления компании
-                        document.getElementById('delete-company').style.display = 'inline-block';
-
-                        // Скрываем кнопку добавления компании
-                        document.getElementById('create-company').style.display = 'none';
-                    } else {
-                        // Если компании нет, показываем кнопку для её добавления
-                        document.getElementById('create-company').style.display = 'block';
-                    }
-                })
-                .catch(error => {
-                    console.error('Ошибка при загрузке компании:', error);
-                });
-
-            // Удаление компании
-            const deleteButton = document.getElementById('delete-company');
-            if (deleteButton) {
-                deleteButton.addEventListener('click', function() {
-                    if (confirm("Вы уверены, что хотите удалить компанию?")) {
-                        fetch('../backend/delete_company.php', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                            body: new URLSearchParams({ user_id: userId })
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                alert('Компания успешно удалена!');
-                                location.reload(); // Перезагружаем страницу
-                            } else {
-                                alert('Ошибка при удалении компании: ' + data.message);
-                            }
-                        })
-                        .catch(error => {
-                            alert('Ошибка при удалении компании: ' + error);
-                        });
-                    }
-                });
-            }
+           
 
             
     // Обработка кнопок "Изменить" для данных пользователя

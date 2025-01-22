@@ -156,17 +156,74 @@ main {
     margin-top: 0; /* Убираем верхний отступ */
 }
 
-footer {
-    font-family: "Lora";
-    text-align: center;
-    padding: 20px;
+/* Общие стили для футера */
+/* Общие стили для футера */
+.footer {
     background-color: rgba(229, 212, 255);
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    border: 2px solid #000;
-}
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: #333;
+    border-top: 2px solid black; ;
+  }
+  
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .footer-section {
+    flex: 1;
+    min-width: 200px;
+    margin: 10px;
+  }
+  
+  .footer h3, .footer h4 {
+    color: #5c3181;
+  }
+  
+  .footer ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer ul li {
+    margin-bottom: 8px;
+  }
+  
+  .footer .social-links {
+    margin-top: 10px;
+  }
+  
+  .footer .social-icon {
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 24px;
+  }
+  
+  .footer .social-icon.facebook {
+    color: #3b5998;
+  }
+  
+  .footer .social-icon.twitter {
+    color: #00acee;
+  }
+  
+  .footer .social-icon.instagram {
+    color: #e4405f;
+  }
+  
+  /* Нижняя часть футера */
+  .footer-bottom {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #aaa;
+  }
 
+  
 .form-group {
     margin-bottom: 25px; /* Отступ между полями формы */
 }

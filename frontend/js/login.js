@@ -28,6 +28,8 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
                 window.location.href = 'home-avt.html'; // Для соискателя
             } else if (data.role === 'employer') {
                 window.location.href = 'home_avt_employer.html'; // Для работодателя
+            } else if (data.role === 'admin'){
+                window.location.href = 'home-admin.html'; // Для админа
             } else {
                 window.location.href = 'home.html'; // На случай, если роль неизвестна
             }

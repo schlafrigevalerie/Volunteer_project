@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карьера с сердцем</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        window.onload = function() {
+            // Загружаем вопросы и ответы
+            fetch('../backend/get_faq.php')
+                .then(response => response.json()) // Преобразуем ответ в формат JSON
+                .then(data => {
+                    const faqContainer = document.getElementById('faq-container');
+                    
+                    // Если есть данные
+                    if (data.length > 0) {
+                        data.forEach(item => {
+                            // Создаем элемент для вопроса
+                            const questionBox = document.createElement('div');
+                            questionBox.className = 'faq-question';
+                            questionBox.style.backgroundColor = 'white';
+                            questionBox.style.padding = '10px';
+                            questionBox.style.margin = '10px 0';
+                            questionBox.style.border = '1px solid #ccc';
+                            questionBox.textContent = item.question;
+
+                            // Создаем элемент для ответа
+                            const answerBox = document.createElement('div');
+                            answerBox.className = 'faq-answer';
+                            answerBox.style.backgroundColor = '#DCBFFF';
+                            answerBox.style.padding = '10px';
+                            answerBox.style.margin = '10px 0';
+                            answerBox.style.border = '1px solid #ccc';
+                            answerBox.textContent = item.answer;
+
+                            // Добавляем вопрос и ответ в контейнер
+                            faqContainer.appendChild(questionBox);
+                            faqContainer.appendChild(answerBox);
+                        });
+                    } else {
+                        faqContainer.innerHTML = '<p>Нет вопросов с ответами.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка загрузки данных:', error);
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const questionBoxes = document.querySelectorAll('.faq-question');
+        
+            questionBoxes.forEach(function(questionBox) {
+                questionBox.addEventListener('click', function() {
+                    const answerBox = questionBox.nextElementSibling; // Получаем следующий элемент (ответ)
+
+                    // Переключаем класс для отображения ответа
+                    answerBox.classList.toggle('show');
+                });
+            });
+        });
+
+        
+    </script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="home-avt.html"><img src="images/work-logo.svg" alt="Логотип"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="vacancy-emp.html">Вакансии</a></li>
+                    <li><a href="faq-emp.html">Ответы на вопросы</a></li>
+                    <li><a href="information.html">Информация</a></li>
+                    <li><a href="faq.html">Рекомендации</a></li>
+                </ul>
+            </nav>
+            <div class="auth-links">
+                <a href="lk.html" class="button">Личный кабинет</a>
+                <a href="home.html" class="login-button">Выйти</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="content-box-greetings">
+            <h1>Задай вопрос, и наш администратор на него ответит!</h1>  
+            <h2>Но сначала проверь, задавали ли этот вопрос ранее!</h2>
+        </div>
+
+        <div class="content-box-greetings">
+            <textarea id="dream" name="dream" rows="5" cols="33"></textarea>
+            <button id="submit-question" type="button" class="button small-button">Отправить!</button>
+        </div>
+
+        <h2>Вопросы от других пользователей</h2>
+
+        <div id="faq-container" class="faq-questions">
+            <!-- Вопросы и ответы будут добавляться сюда динамически -->
+        </div>
+
+    </main>
+    <footer class="footer">
+        <div class="footer-container">
+          <div class="footer-section">
+            <h3>Карьера с сердцем</h3>
+            <p>Мы помогаем людям с синдромом Дауна находить работу, развивать свои таланты и строить карьеру.</p>
+          </div>
+          
+          <div class="footer-section">
+            <h4>Контакты</h4>
+            <ul>
+              <li><strong>Телефон:</strong> +7 123 456 78 90</li>
+              <li><strong>Email:</strong> info@career-heart.ru</li>
+              <li><strong>Адрес:</strong> Москва, ул. Примерная, д. 15</li>
+            </ul>
+          </div>
+          
+          <div class="footer-section">
+            <h4>Следите за нами</h4>
+            <div class="social-links">
+              <a href="https://facebook.com" class="social-icon facebook">Вконтакте</a>
+              <a href="https://twitter.com" class="social-icon twitter">Телеграм</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>&copy; 2025 Карьера с сердцем. Все права защищены.</p>
+        </div>
+      </footer>
+    <script>
+        // Функция для отправки вопроса
+        document.getElementById('submit-question').addEventListener('click', function() {
+            const questionText = document.getElementById('dream').value.trim();
+            
+            if (questionText !== '') {
+                fetch('../backend/save_question.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({
+                        question: questionText
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Ваш вопрос отправлен!');
+                        // Очистить поле ввода
+                        document.getElementById('dream').value = '';
+                    } else {
+                        alert('Ошибка при отправке вопроса. Попробуйте позже.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка:', error);
+                    alert('Произошла ошибка. Попробуйте снова.');
+                });
+            } else {
+                alert('Пожалуйста, введите текст вопроса.');
+            }
+        });
+    </script>
+</body>
+</html>

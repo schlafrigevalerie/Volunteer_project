@@ -54,7 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         // Определение role_id на основе выбранной роли
-        $roleId = ($role === 'job_seeker') ? 1 : 2;
+        $roleId = ($role === 'job_seeker') ? 1 : (($role === 'admin') ? 3 : 2);
+
 
         // SQL-запрос для вставки данных в таблицу users
         $sql = "INSERT INTO users (first_name, last_name, middle_name, birth_date, phone_number, email, password, role_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ответить на вопросы</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        window.onload = function() {
+            // Загружаем вопросы с сервера
+            fetch('../backend/fetch_question.php')
+                .then(response => response.json()) // Преобразуем ответ в формат JSON
+                .then(data => {
+                    const faqContainer = document.getElementById('faq-container');
+                    
+                    // Если есть вопросы
+                    if (data.length > 0) {
+                        data.forEach(item => {
+                            // Создаем элемент для вопроса
+                            const questionBox = document.createElement('div');
+                            questionBox.className = 'faq-question';
+                            questionBox.style.backgroundColor = 'white';
+                            questionBox.style.padding = '10px';
+                            questionBox.style.margin = '10px 0';
+                            questionBox.style.border = '1px solid #ccc';
+
+                            const questionText = document.createElement('p');
+                            questionText.textContent = item.question;
+                            questionBox.appendChild(questionText);
+
+                            // Создаем текстовое поле для ответа
+                            const answerTextarea = document.createElement('textarea');
+                            answerTextarea.placeholder = "Ваш ответ";
+                            answerTextarea.id = 'answer_' + item.id;
+                            questionBox.appendChild(answerTextarea);
+
+                            // Создаем кнопку для отправки ответа
+                            const submitButton = document.createElement('button');
+                            submitButton.textContent = 'Ответить';
+                            submitButton.onclick = function() {
+                                submitAnswer(item.id);
+                            };
+                            questionBox.appendChild(submitButton);
+
+                            faqContainer.appendChild(questionBox);
+                        });
+                    } else {
+                        faqContainer.innerHTML = '<p>Нет вопросов для ответа.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка загрузки данных:', error);
+                });
+        }
+
+        // Отправка ответа на сервер
+        function submitAnswer(questionId) {
+            const answerTextarea = document.getElementById('answer_' + questionId);
+            const answer = answerTextarea.value.trim();
+
+            if (answer) {
+                // Отправляем ответ на сервер
+                fetch('../backend/submit_answer.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: 'id=' + questionId + '&answer=' + encodeURIComponent(answer)
+                })
+                .then(response => response.text())
+                .then(data => {
+                    // Ответ успешно отправлен, отключаем textarea и кнопку
+                    alert(data);
+                    answerTextarea.disabled = true;
+                    const button = answerTextarea.nextElementSibling;
+                    button.disabled = true;
+                })
+                .catch(error => {
+                    console.error('Ошибка отправки ответа:', error);
+                    alert('Произошла ошибка при отправке ответа.');
+                });
+            } else {
+                alert('Пожалуйста, введите ответ!');
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="home-admin.html"><img src="images/work-logo.svg" alt="Логотип"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="faq_admin.html">Ответить на вопросы</a></li>
+                </ul>
+            </nav>
+            <div class="auth-links">
+                <a href="lk-admin.html" class="button">Личный кабинет</a>
+                <a href="home.html" class="login-button">Выйти</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h1>Ответьте на вопросы</h1>
+
+        <div id="faq-container">
+            <!-- Вопросы будут загружаться сюда -->
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+          <div class="footer-section">
+            <h3>Карьера с сердцем</h3>
+            <p>Мы помогаем людям с синдромом Дауна находить работу, развивать свои таланты и строить карьеру.</p>
+          </div>
+          
+          <div class="footer-section">
+            <h4>Контакты</h4>
+            <ul>
+              <li><strong>Телефон:</strong> +7 123 456 78 90</li>
+              <li><strong>Email:</strong> info@career-heart.ru</li>
+              <li><strong>Адрес:</strong> Москва, ул. Примерная, д. 15</li>
+            </ul>
+          </div>
+          
+          <div class="footer-section">
+            <h4>Следите за нами</h4>
+            <div class="social-links">
+              <a href="https://facebook.com" class="social-icon facebook">Вконтакте</a>
+              <a href="https://twitter.com" class="social-icon twitter">Телеграм</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>&copy; 2025 Карьера с сердцем. Все права защищены.</p>
+        </div>
+      </footer>
+</body>
+</html>

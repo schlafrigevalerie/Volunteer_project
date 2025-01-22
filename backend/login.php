@@ -65,6 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $role = 'job_seeker'; // Соискатель
             } elseif ($role_id == 2) {
                 $role = 'employer'; // Работодатель
+            } elseif ($role_id == 3) {
+                $role = 'admin'; // Админ
             }
 
             // Успешная авторизация
